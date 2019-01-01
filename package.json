@@ -26,6 +26,6 @@
   },
   "scripts": {
     "watch": "NODE_ENV=development parcel src/index.html --no-autoinstall",
-    "build": "NODE_ENV=production parcel src/index.html --no-autoinstall"
+    "build": "NODE_ENV=production parcel build src/index.html --no-autoinstall"
   }
 }
