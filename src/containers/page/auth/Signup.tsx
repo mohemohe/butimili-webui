@@ -177,7 +177,7 @@ export class SignupPage extends React.Component<IProps, IState> {
 									disabled={!(this.state.validName && this.state.password !== "" && this.state.password === this.state.passwordCheck)}
 									variant="raised"
 									classes={{root: styles.loginButton}}
-									onClick={() => this.props.AuthStore!.login(this.state.name, this.state.password)}>
+									onClick={() => this.props.AuthStore!.create(this.state.name, this.state.password)}>
 									<PersonAdd/>
 									<span style={{marginLeft: ".5rem"}}>アカウント作成</span>
 								</Button>
