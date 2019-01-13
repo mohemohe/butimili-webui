@@ -38,7 +38,8 @@ if (app) {
 	Object.assign(app.style, rootStyle);
 }
 
+const props = {} as any;
 ReactDOM.render(
-	<App/>,
+	<App {...props}/>,
 	app,
 );

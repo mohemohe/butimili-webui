@@ -172,7 +172,7 @@ export class LeftNav extends React.Component<IProps, IState> {
 								in={isCollapse}
 								timeout="auto"
 								unmountOnExit>
-								<List component="div" disablePadding>
+								<List component={"div" as any} disablePadding>
 									{childListItem.listItemArray}
 								</List>
 							</Collapse>

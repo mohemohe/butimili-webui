@@ -2,8 +2,9 @@ import * as React from "react";
 import { Provider } from "mobx-react";
 import store from "../stores";
 import { Router } from "./Router";
+import {IPropsBase} from "../types/IPropsBase";
 
-interface IProps {
+interface IProps extends IPropsBase<any> {
 }
 
 interface IState {
@@ -21,7 +22,7 @@ export class App extends React.Component<IProps, IState> {
 	public render() {
 		return (
 			<Provider {...store}>
-				<Router/>
+				<Router {...this.props}/>
 			</Provider>
 		);
 	}

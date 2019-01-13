@@ -7,6 +7,7 @@ import {SignupPage} from "../containers/page/auth/Signup";
 import {ButimiListEdit} from "../containers/page/mypage/butimilist/ButimiListEdit";
 import {InstanceList} from "../containers/page/mypage/InstanceList";
 import {ButimiListPreview} from "../containers/page/mypage/butimilist/ButimiListPreview";
+import {InstanceListEdit} from "../containers/page/mypage/instancelist/InstanceListEdit";
 
 export interface IRouteInfo {
 	name: string;
@@ -79,7 +80,7 @@ export const ROUTES: IRouteInfo[] = [
         name: "インスタンス管理",
         path: "/mypage/instance",
         icon: <Domain/>,
-        component: InstanceList,
+        component: InstanceListEdit,
         showLeftNav: true,
         permission: [],
 		children: [
@@ -87,7 +88,7 @@ export const ROUTES: IRouteInfo[] = [
                 name: "インスタンス編集",
                 path: "/mypage/instance/edit",
                 icon: <Edit/>,
-                component: InstanceList,
+                component: InstanceListEdit,
                 showLeftNav: true,
                 permission: [],
             },

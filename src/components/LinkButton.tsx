@@ -8,6 +8,7 @@ interface IProps extends ButtonProps {
 	to: string;
 	buttonStyle?: any;
 	typeStyle?: string;
+	target?: string;
 }
 
 interface IState extends React.ComponentState {
@@ -26,7 +27,8 @@ export class LinkButton extends React.Component<IProps, IState> {
 
 	public render() {
 		const otherProps = Object.assign({}, this.props) as IProps;
-		delete otherProps.variant;
+        delete otherProps.variant;
+        delete otherProps.target;
 
 		const button = (
 			<Button variant={this.props.variant ? this.props.variant : "raised"} className={`${this.props.typeStyle} ${this.props.buttonStyle}`} {...otherProps}>
@@ -38,7 +40,7 @@ export class LinkButton extends React.Component<IProps, IState> {
 			this.props.disabled ?
 				<div>{button}</div> :
 			this.props.to.indexOf("http") === 0 ?
-				<a href={this.props.to} className={styles.link}>
+				<a href={this.props.to} className={styles.link} target={this.props.target}>
 					{button}
 				</a>
 				:

@@ -2,7 +2,7 @@ import * as React from "react";
 import {style} from "typestyle/lib";
 import {inject, observer} from "mobx-react";
 import {IPropsBase} from "../../../../types/IPropsBase";
-import {ButimiListStore} from "../../../../stores/ButimiListStore";
+import {InstanceListStore} from "../../../../stores/InstanceListStore";
 import {
     Button,
     Dialog,
@@ -17,7 +17,7 @@ import {Add, Delete} from "@material-ui/icons";
 import {ValidatableTextField} from "../../../../components/ValidatableTextField";
 
 interface IProps extends IPropsBase<HTMLDivElement> {
-    ButimiListStore?: ButimiListStore;
+    InstanceListStore?: InstanceListStore;
 }
 
 interface IState extends React.ComponentState {
@@ -47,9 +47,9 @@ const styles = {
     })
 };
 
-@inject("ButimiListStore")
+@inject("InstanceListStore")
 @observer
-export class ButimiListEdit extends React.Component<IProps, IState> {
+export class InstanceListEdit extends React.Component<IProps, IState> {
     constructor(props: IProps, state: IState) {
         super(props, state);
 
@@ -61,11 +61,11 @@ export class ButimiListEdit extends React.Component<IProps, IState> {
     }
 
     public componentDidMount() {
-        this.props.ButimiListStore!.getList();
+        this.props.InstanceListStore!.getList();
     }
 
     public render() {
-        const list = this.props.ButimiListStore!.butimiList;
+        const list = this.props.InstanceListStore!.instanceList;
         return (
             <>
                 <div className={styles.root}>
@@ -96,13 +96,13 @@ export class ButimiListEdit extends React.Component<IProps, IState> {
                     <DialogTitle id="form-dialog-title">追加</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-                            追加するユーザーをインスタンス名を含めて入力してください
+                            追加するインスタンスを入力してください
                         </DialogContentText>
                         <ValidatableTextField
                             autoFocus
                             margin="dense"
                             id="name"
-                            label="screen_name@instance_domain"
+                            label="instance_domain"
                             type="email"
                             fullWidth
                             validators={[
@@ -123,7 +123,7 @@ export class ButimiListEdit extends React.Component<IProps, IState> {
                             this.setState({
                                 showAddDialog: false,
                             });
-                            this.props.ButimiListStore!.add(this.state.selected);
+                            this.props.InstanceListStore!.add(this.state.selected);
                         }} color="secondary" autoFocus>
                             追加
                         </Button>
@@ -134,7 +134,7 @@ export class ButimiListEdit extends React.Component<IProps, IState> {
                     <DialogTitle>確認</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-                            '{this.state.selected}' さんを削除しますか？
+                            '{this.state.selected}' を削除しますか？
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
@@ -143,11 +143,11 @@ export class ButimiListEdit extends React.Component<IProps, IState> {
                         })}>
                             キャンセル
                         </Button>
-                        <Button onClick={() => {
+                        <Button disabled={this.state.selected === ""} onClick={() => {
                             this.setState({
                                 showDeleteDialog: false,
                             });
-                            this.props.ButimiListStore!.delete(this.state.selected);
+                            this.props.InstanceListStore!.delete(this.state.selected);
                         }} color="secondary" autoFocus>
                             OK
                         </Button>
