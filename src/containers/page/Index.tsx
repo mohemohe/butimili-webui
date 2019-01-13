@@ -4,6 +4,7 @@ import {inject, observer} from "mobx-react";
 import {COLORS} from "../../constants/Style";
 import {AuthStatus, AuthStore} from "../../stores/AuthStore";
 import {IPropsBase} from "../../types/IPropsBase";
+import Kenkov from "../../assets/kenkov.png";
 
 interface IProps extends IPropsBase<HTMLDivElement> {
     AuthStore?: AuthStore;
@@ -25,6 +26,11 @@ const styles = {
         display: "flex",
         flexDirection: "column",
         backgroundColor: COLORS.DarkColor,
+        backgroundImage: `url(${Kenkov})`,
+        backgroundPosition: `bottom right`,
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
+        backgroundSize: "66vh auto",
         color: COLORS.EmotionalWhite,
     }),
     authorizedRoot: style({

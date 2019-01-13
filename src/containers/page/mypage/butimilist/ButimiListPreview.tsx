@@ -68,7 +68,6 @@ export class ButimiListPreview extends React.Component<IProps, IState> {
             }
         }
         const mastodonCount = this.wordCount(butimili);
-        const actualCount = butimili.length;
 
         return (
             <div>
@@ -89,7 +88,8 @@ export class ButimiListPreview extends React.Component<IProps, IState> {
                             <em>未選択</em>
                         </MenuItem>
                         {
-                            Object.assign([], this.props.InstanceListStore!.instanceList).map((instance) => <MenuItem value={instance}>{instance}</MenuItem>)
+                            Object.assign([], this.props.InstanceListStore!.instanceList).map((instance) => <MenuItem
+                                value={instance}>{instance}</MenuItem>)
                         }
                     </Select>
                 </FormControl>
@@ -107,7 +107,10 @@ export class ButimiListPreview extends React.Component<IProps, IState> {
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <LinkButton disabled={this.state.selected === "" || mastodonCount > 500} variant="contained" color="primary" to={`https://${this.state.selected}/share?text=${encodeURIComponent(butimili)}`} target={"_blank"}><Share/> 共有</LinkButton>
+                        <LinkButton disabled={this.state.selected === "" || mastodonCount > 500} variant="contained"
+                                    color="primary"
+                                    to={`https://${this.state.selected}/share?text=${encodeURIComponent(butimili)}`}
+                                    target={"_blank"}><Share/> 共有</LinkButton>
                         <Button variant="contained" onClick={() => {
                             if (ClipboardHelper.copyToClipoboard(butimili)) {
                                 this.props.ToastStore!.showToast("コピーしました");
