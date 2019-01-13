@@ -53,17 +53,22 @@ export class ButimiListPreview extends React.Component<IProps, IState> {
         this.props.InstanceListStore!.getList();
     }
 
+    private wordCount(text: string) {
+        return text.replace(/(@.*?)@.*?\s/g, "$1 ").length;
+    }
+
     public render() {
 
         let butimili = this.props.ButimiListStore!.butimiliPreview;
         if (this.state.selected !== "") {
             butimili = butimili.split(`@${this.state.selected}`).join("");
-            if (butimili.length > 500) {
-                butimili = butimili.substring(0, 500);
+            const tmpCount = this.wordCount(butimili);
+            if (tmpCount > 500) {
+                butimili = butimili.substring(0, butimili.length - (tmpCount - 500));
             }
         }
-        const count = butimili.length;
-
+        const mastodonCount = this.wordCount(butimili);
+        const actualCount = butimili.length;
 
         return (
             <div>
@@ -98,11 +103,11 @@ export class ButimiListPreview extends React.Component<IProps, IState> {
                             {butimili}
                         </Typography>
                         <Typography color="textSecondary">
-                            {count} / 500
+                            残り文字数: {500 - mastodonCount} / 500
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <LinkButton disabled={this.state.selected === ""} variant="contained" color="primary" to={`https://${this.state.selected}/share?text=${encodeURIComponent(butimili)}`} target={"_blank"}><Share/> 共有</LinkButton>
+                        <LinkButton disabled={this.state.selected === "" || mastodonCount > 500} variant="contained" color="primary" to={`https://${this.state.selected}/share?text=${encodeURIComponent(butimili)}`} target={"_blank"}><Share/> 共有</LinkButton>
                         <Button variant="contained" onClick={() => {
                             if (ClipboardHelper.copyToClipoboard(butimili)) {
                                 this.props.ToastStore!.showToast("コピーしました");
